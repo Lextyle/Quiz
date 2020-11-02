@@ -74,7 +74,7 @@ for level in levels:
 	if answer:
 		rating += max_rating / len(levels)
 	num += 1
-rating_label = Label(window_width // 2, window_height // 2, window_width // 2, f"rating is {round(rating)}", fonts["PixelArt"], (255, 255, 255), "yes")
+rating_label = Label(window_width // 2, window_height // 2, window_width // 2, f"rating is {round(rating)} from {max_rating}", fonts["PixelArt"], (255, 255, 255), "yes")
 while True:
 	window.fill((45, 5, 42))
 	for event in pygame.event.get():
