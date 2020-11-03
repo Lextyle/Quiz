@@ -9,6 +9,9 @@ window = pygame.display.set_mode((window_width, window_height), pygame.FULLSCREE
 fonts = {
 	"PixelArt": pygame.font.Font("SFPixelate.ttf", 20)
 }
+quit_button_image = pygame.image.load("quit_button_image.png")
+quit_button_image_hover = pygame.image.load("quit_button_image_hover.png")
+quit_button = Button(window_width - 20 - quit_button_image.get_width(), 20, quit_button_image, quit_button_image_hover, 0, 0)
 def Quiz(number, question, buttons_num, buttons_texts, true_answer):
 	number_label = Label(20, 20, window_width // 2, number, fonts["PixelArt"], (255, 255, 255))
 	question_label = Label(window_width // 2, window_height // 2, window_width // 2, question, fonts["PixelArt"], (255, 255, 255), "yes")
@@ -50,12 +53,16 @@ def Quiz(number, question, buttons_num, buttons_texts, true_answer):
 						return True
 					else:
 						return False
+			quit_button.update(event)
+			if quit_button.pressed:
+				pygame.quit()
 		pygame.draw.rect(window, (45 - 5, 5 - 5, 42 - 5), (0, buttons_surface_y, window_width, window_height - buttons_surface_y))
 		for button in buttons:
 			button[-1].draw(buttons_surface)
 		window.blit(buttons_surface, (buttons_surface_x, buttons_surface_y))
 		question_label.draw(window)
 		number_label.draw(window)
+		quit_button.draw(window)
 		pygame.display.flip()
 # "How long is everest?"
 levels = [
@@ -80,5 +87,9 @@ while True:
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			pygame.quit()
+		quit_button.update(event)
+		if quit_button.pressed:
+			pygame.quit()
+	quit_button.draw(window)
 	rating_label.draw(window)
 	pygame.display.flip()
